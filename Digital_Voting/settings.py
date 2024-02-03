@@ -82,6 +82,7 @@ DATABASES = {
         'NAME': 'Digital_Voting',
         'USER': 'postgres',
         'PASSWORD':'root',
+        'PORT':'5432',
         'HOST':'localhost',
            }
 }
