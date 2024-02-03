@@ -11,5 +11,4 @@ psycopg2
 requests
 setuptools
 opencv-python
-dlib
 cmake
