@@ -1,15 +1,15 @@
-pip install scikit-learn
-pip install certifi
-pip install chardet
-pip install Django
-pip install facerecog
-pip install idna
-pip install opencv-contrib-python
-pip install pandas
-pip install Pillow
-pip install psycopg2
-pip install requests
-pip install setuptools
-pip install opencv-python
-pip install dlib
-pip install cmake
+scikit-learn
+certifi
+chardet
+Django
+facerecog
+idna
+opencv-contrib-python
+pandas
+Pillow
+psycopg2
+requests
+setuptools
+opencv-python
+dlib
+cmake
