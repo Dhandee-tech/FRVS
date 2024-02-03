@@ -1,0 +1,766 @@
+ {% extends 'admin/master.html' %}
+ {% block title %}  home {% endblock title %}
+ {% load static %}
+ {% block content %}
+    <script>
+        function st(s1,s2)
+            {
+                var s1 = document.getElementById(s1);
+                var s2 = document.getElementById(s2);
+                s2.innerHTML = "";
+                if(s1.value == "ANDAMAN AND NICOBAR ISLANDS","GOA","GUJARAT","ANDHRA PRADESH","ARUNACHAL PRADESH","ASSAM","BIHAR","CHANDIGARH","CHHATTISGARH","DADRA &amp; NAGAR HAVELI","DAMAN &amp; DIU","HARYANA","HIMACHAL PRADESH","JAMMU & KASHMIR","JHARKHAND","KARNATAKA","KERALA","LAKSHADWEEP","MADHYA PRADESH","MAHARASHTRA","MEGHALAYA","MIZORAM","NAGALAND","NCT OF DELHI ","ODISHA","PUDUCHERRY","PUNJAB","RAJASTHAN","SIKKIM","TAMIL NADU","TELANGANA","TRIPURA","UTTAR PRADESH","UTTARAKHAND","WEST BENGAL")
+                    {
+                       var optionArray = ["|","Parliamentary|Parliamentary","Assembly|Assembly"];
+                    }
+                for(var option in optionArray)
+                    {
+                        var pair = optionArray[option].split("|");
+                        var newOption = document.createElement("option");
+                        newOption.value = pair[0];
+                        newOption.innerHTML = pair[1];
+                        s2.options.add(newOption);
+                     }
+            }
+       function st2(s2,s3)
+            {
+                var s1 = document.getElementById("state");
+                var s2 = document.getElementById(s2);
+                var s3 = document.getElementById(s3);
+                s3.innerHTML = "";
+                if(s1.value == "ANDAMAN AND NICOBAR ISLANDS")
+                    {
+                       var optionArray1 = ["|"];
+                    }
+                 else if(s1.value == "ANDHRA PRADESH")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                                var optionArray1 = ["|","araku|Araku","srikakulam|Srikakulam","vizianagaram|Vizianagaram","visakhapatnam|Visakhapatnam",
+                               "anakapalli|Anakapalli","kakinada|Kakinada","Amalapuram|Amalapuram","Rajahmundry|Rajahmundry",
+                               "Narasapuram|Narasapuram",	"Eluru|Eluru",	"Machilipatnam|Machilipatnam","Vijayawada|Vijayawada",
+                               "Guntur|Guntur","Narasaraopet|Narasaraopet","Bapatla|Bapatla","Ongole|Ongole","Nandyal|Nandyal",
+                               "Kurnool|Kurnool","Anantapur|Anantapur","Hindupur|Hindupur","Kadapa|Kadapa","Nellore|Nellore",];
+                           }
+                       else{
+                               var optionArray1=["|","Tirupati|Tirupati",
+                               "Rajampet|Rajampet","Chittoor|Chittoor"]
+                           }
+                   }
+                  else if(s1.value == "ARUNACHAL PRADESH")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                      
+                   }
+                 else if(s1.value == "ASSAM")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                                var optionArray1 = ["|","Karimganj|Karimganj","Silchar|Silchar","Autonomous District|Autonomous District","Dhubri|Dhubri",
+                                               "Kokrajhar|Kokrajhar","Barpeta|Barpeta","auhati|Gauhati","Mangaldoi|Mangaldoi","Tezpur|Tezpur",
+                                               "Nowgong|Nowgong","Kaliabor|Kaliabor","Jorhat|Jorhat","Dibrugarh|Dibrugarh","Lakhimpur|Lakhimpur"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "BIHAR")
+                   {
+                        if(s2.value == "Parliamentary")
+                           {
+                                var optionArray1 = ["|","Valmiki Nagar|Valmiki Nagar","Paschim Champaran|Paschim Champaran",
+                                               "Purvi Champaran|Purvi Champaran","Sheohar|Sheohar","Sitamarhi|Sitamarhi","Madhubani|Madhubani",
+                                               "Jhanjharpur|Jhanjharpur","Supaul|Supaul","Araria|Araria","Kishanganj|Kishanganj",
+                                               "Katihar|Katihar","Purnia|Purnia","Madhepura|Madhepura", "Darbhanga|Darbhanga",
+                                               "Muzaffarpur|Muzaffarpur","Vaishali|Vaishali","Gopalganj|Gopalganj","Siwan|Siwan",
+                                               "Maharajganj|Maharajganj",
+                                               "Saran|Saran",
+                                               "Hajipur|Hajipur",
+                                               "Ujiarpur|Ujiarpur",
+                                               "Samastipur|Samastipur",
+                                               "Begusarai|Begusarai",
+                                               "Khagaria|Khagaria",
+                                               "Bhagalpur|Bhagalpur",
+                                               "Banka|Banka",
+                                               "Munger|Munger",
+                                               "Nalanda|Nalanda",
+                                               "Patna Sahib|Patna Sahib",
+                                               "Pataliputra|Pataliputra",
+                                               "Arrah|Arrah",
+                                               "Buxar|Buxar",
+                                               "Sasaram|Sasaram",
+                                               "Karakat|Karakat",
+                                               "Jahanabad|Jahanabad",
+                                               "Aurangabad|Aurangabad",
+                                               "Gaya|Gaya",
+                                               "Nawada|Nawada",
+                                               "Jamui|Jamui"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                  else if(s1.value == "CHANDIGARH")
+                   {
+                        if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Sarguja|Sarguja","Raigarh|Raigarh","Janjgir|Janjgir","Korba|Korba","Bilaspur|Bilaspur",	
+                                               "Rajnandgaon|Rajnandgaon","Durg|Durg","Raipur|Raipur","Mahasamund|Mahasamund",	
+                                               "Bastar|Bastar","Kanker|Kanker"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       
+                   }
+                else if(s1.value == "CHHATTISGARH")
+                   {
+                        if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                   else if(s1.value == "DADRA &amp; NAGAR HAVELI")
+                   {
+                        if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                   else if(s1.value == "DAMAN &amp; DIU")
+                   {
+                        if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                   else if(s1.value == "GOA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                                var optionArray1 = ["|","North Goa|North Goa","South Goa|South Goa"];
+                           }
+                       else{
+                               var optionArray1=["|","Tirupati|Tirupati",
+                               "Rajampet|Rajampet","Chittoor|Chittoor"]
+                           }
+                       
+                   }
+                   else if(s1.value == "OYO STATE")
+                   {
+                        if(s2.value == "Parliamentary")
+                           {
+                                var optionArray1 = ["|","Akinyele Moniya LGA|Akinyele Moniya LGA", "Afijio Jobele LGA|Afijio Jobele LGA", "Ibadan North Agodi Gate LGA|Ibadan North Agodi Gate LGA",	"Ibadan North-East Iwo Road LGA|Ibadan North-East Iwo Road LGA",
+                                "Ibadan North-West LGA|Ibadan North-West LGA","Ibadan South-West Ring Road LGA|Ibadan South-West Ring Road LGA","Ibadan South-East Mapo LGA|Ibadan South-East Mapo LGA",	
+                                "Ibarapa North LGA|Ibarapa North LGA","Ibarapa Central LGA|Ibarapa Central LGA","Ibarapa East Eruwa LGA|Ibarapa East Eruwa LGA",	
+                                "Ido LGA|Ido LGA","Irepo LGA|Irepo LGA", "Iseyin LGA|Iseyin LGA","Kajola LGA|Kajola LGA",	
+                                "Lagelu LGA|Lagelu LGA","Ogbomoso North LGA|Ogbomoso North LGA", "Ogbomoso South LGA|Ogbomoso South LGA","Oyo West Ojongbodu LGA|Oyo West Ojongbodu LGA",	
+                                "Atiba Ofa Meta LGA|Atiba Ofa Meta LGA","Atisbo Tede LGA|Atisbo Tede LGA","Saki West LGA|Saki West LGA","Itesiwaju Otu LGA|Itesiwaju Otu LGA",	
+                                "Iwajowa LGA|Iwajowa LGA","Olorunsogo LGA|Olorunsogo LGA","Oluyole LGA|Oluyole LGA","Ogo Oluwa LGA|Ogo Oluwa LGA","Surulere LGA|Surulere LGA","Orelope LGA|Orelope LGA",
+                                "Ori Ire LGA|Ori Ire LGA","Oyo East  LGA|Oyo East  LGA","Ona Ara LGA|Ona Ara LGA"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Akinyele Moniya LGA|Akinyele Moniya LGA", "Afijio Jobele LGA|Afijio Jobele LGA", "Ibadan North Agodi Gate LGA|Ibadan North Agodi Gate LGA",	"Ibadan North-East Iwo Road LGA|Ibadan North-East Iwo Road LGA",
+                                "Ibadan North-West LGA|Ibadan North-West LGA","Ibadan South-West Ring Road LGA|Ibadan South-West Ring Road LGA","Ibadan South-East Mapo LGA|Ibadan South-East Mapo LGA",	
+                                "Ibarapa North LGA|Ibarapa North LGA","Ibarapa Central LGA|Ibarapa Central LGA","Ibarapa East Eruwa LGA|Ibarapa East Eruwa LGA",	
+                                "Ido LGA|Ido LGA","Irepo LGA|Irepo LGA", "Iseyin LGA|Iseyin LGA","Kajola LGA|Kajola LGA",	
+                                "Lagelu LGA|Lagelu LGA","Ogbomoso North LGA|Ogbomoso North LGA", "Ogbomoso South LGA|Ogbomoso South LGA","Oyo West Ojongbodu LGA|Oyo West Ojongbodu LGA",	
+                                "Atiba Ofa Meta LGA|Atiba Ofa Meta LGA","Atisbo Tede LGA|Atisbo Tede LGA","Saki West LGA|Saki West LGA","Itesiwaju Otu LGA|Itesiwaju Otu LGA",	
+                                "Iwajowa LGA|Iwajowa LGA","Olorunsogo LGA|Olorunsogo LGA","Oluyole LGA|Oluyole LGA","Ogo Oluwa LGA|Ogo Oluwa LGA","Surulere LGA|Surulere LGA","Orelope LGA|Orelope LGA",
+                                "Ori Ire LGA|Ori Ire LGA","Oyo East  LGA|Oyo East  LGA","Ona Ara LGA|Ona Ara LGA"];
+
+
+                           }
+                   }
+                   else if(s1.value == "HARYANA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                                var optionArray1 = ["|","Ambala|Ambala","Kurukshetra|Kurukshetra", "Sirsa|Sirsa","Hissar|Hissar", "Karnal|Karnal",	
+                                               "Sonipat|Sonipat","Rohtak|Rohtak", "Bhiwani–Mahendragarh|Bhiwani–Mahendragarh",	
+                                               "Gurgaon|Gurgaon","Faridabad|Faridabad"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                   else if(s1.value == "HIMACHAL PRADESH")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               
+                       var optionArray1 = ["|","Kangra|Kangra",
+                                               "Mandi|Mandi",
+                                               "Hamirpur|Hamirpur",
+                                               "Shimla|Shimla"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                   else if(s1.value == "JAMMU & KASHMIR")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       var optionArray1 = ["|",];
+                   }
+                   else if(s1.value == "JHARKHAND")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       var optionArray1 = ["|",];
+                   }
+                else if(s1.value == "KARNATAKA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                              var optionArray1 = ["|",];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       
+                   }
+                 else if(s1.value == "KERALA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                              
+                       var optionArray1 = ["|","Kasaragod|Kasaragod", "Kannur|Kannur","Vatakara|Vatakara","Wayanad|Wayanad", "Kozhikode|Kozhikode",
+                                               "Malappuram|Malappuram","Ponnani|Ponnani","Palakkad|Palakkad","Alathur|Alathur","Thrissur|Thrissur",
+                                               "Chalakudy|Chalakudy","Ernakulam|Ernakulam","Idukki|Idukki","Kottayam|Kottayam", "Alappuzha|Alappuzha","Mavelikara|Mavelikara","Pathanamthitta|Pathanamthitta","Kollam|Kollam",
+                                               "Attingal|Attingal","Thiruvananthapuram|Thiruvananthapuram"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "LAKSHADWEEP")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "MADHYA PRADESH")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "MAHARASHTRA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "MANIPUR")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","Inner Manipur|Inner Manipur","Outer Manipur|Outer Manipur"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "MEGHALAYA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","Shillong|Shillong","Tura|Tura"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "MIZORAM")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","MIZORAM|MIZORAM"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "NAGALAND")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","NAGALAND|NAGALAND"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "NCT OF DELHI ")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "ODISHA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                
+                 else if(s1.value == "PUDUCHERRY")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "PUNJAB")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "RAJASTHAN")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "SIKKIM")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","SIKKIM|SIKKIM"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "TAMIL NADU")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "TELANGANA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "TRIPURA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","Tripura West|Tripura West","Tripura East|Tripura East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "UTTAR PRADESH")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "UTTARAKHAND")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","Tehri Garhwal|Tehri Garhwal",	
+                                               "Garhwal|Garhwal",	
+                                               "Almora|Almora",	
+                                               "Nainital–Udhamsingh Nagar|Nainital–Udhamsingh Nagar",	
+                                               "Haridwar|Haridwar"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "WEST BENGAL")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                for(var option in optionArray1)
+                    {
+                        var pair = optionArray1[option].split("|");
+                        var newOption = document.createElement("option");
+                        newOption.value = pair[0];
+                        newOption.innerHTML = pair[1];
+                        s3.options.add(newOption);
+                    }
+                }
+                /*function DOB() {
+                var lblError = document.getElementById("lblError");
+    
+                //Get the date from the TextBox.
+                var dateString = document.getElementById("dob").value;
+                var regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
+    
+                //Check whether valid dd/MM/yyyy Date Format.
+                if (regex.test(dateString)) {
+                    var parts = dateString.split("/");
+                    var dtDOB = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+                    var dtCurrent = new Date();
+                    lblError.innerHTML = "Minimum age must be 18 years."
+                    if (dtCurrent.getFullYear() - dtDOB.getFullYear() < 18) {
+                        return false;
+                    }
+    
+                    if (dtCurrent.getFullYear() - dtDOB.getFullYear() == 18) {
+    
+                        //CD: 11/06/2018 and DB: 15/07/2000. Will turned 18 on 15/07/2018.
+                        if (dtCurrent.getMonth() < dtDOB.getMonth()) {
+                            return false;
+                        }
+                        if (dtCurrent.getMonth() == dtDOB.getMonth()) {
+                            //CD: 11/06/2018 and DB: 15/06/2000. Will turned 18 on 15/06/2018.
+                            if (dtCurrent.getDate() < dtDOB.getDate()) {
+                                return false;
+                            }
+                        }
+                    }
+                    lblError.innerHTML = "";
+                    return true;
+                } else {
+                    lblError.innerHTML = "Enter date in dd/mm/yyyy format ONLY."
+                    return false;
+                }
+            }*/
+        </script>
+<body>
+     <section id="main-content">
+      <section class="wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-file-text-o"></i>Add Candidate</h3>
+            <ol class="breadcrumb">
+              <li><i class="fa fa-home"></i>Home</li>
+              <li><i class="icon_document_alt"></i>Candidate</li>
+              <li><i class="fa fa-file-text-o"></i>Add Candidate</li>
+            </ol>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <header class="panel-heading">
+             Candidate
+              </header>
+              <div class="panel-body">
+                  <form class="form-horizontal " action="add_candidate" method="POST" enctype="multipart/form-data">
+                       {% csrf_token %}
+                      <div class="form-group">
+                    <label class="col-sm-2 control-label">Candidate ID</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control round-input" name="cid" required style="width:80%;">
+                    </div>
+                  </div>
+                    <div class="form-group">
+                    <label class="col-sm-2 control-label">Candidate Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" name="name" required class="form-control round-input" oninput="this.setCustomValidity('')"
+                            oninvalid="this.setCustomValidity('Enter Name')" style="width:80%;">
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="col-sm-2 control-label">Father Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" required  name="fname" class="form-control round-input"  oninput="this.setCustomValidity('')"
+                            oninvalid="this.setCustomValidity('Enter Father Name')" style="width:80%;">
+                    </div>
+                  </div>
+                      <div class="form-group">
+                    <label class="col-sm-2 control-label">Gender</label>
+                    <div class="col-sm-10">
+                        <select name="gender"  class="form-control round-input" required style="width:80%;">
+                            <option selected value="">GENDER</option>
+                            <option value="MALE">MALE</option>
+                            <option value="FEMALE">FEMALE</option>
+                        </select>
+                    </div>
+                  </div>
+                      <div class="form-group">
+                    <label class="col-sm-2 control-label">Birth Date</label>
+                    <div class="col-sm-10">
+                      <input type="date" required  name="dob" placeholder="For example: 02/04/1998"
+                             style="width:80%;"  class="form-control round-input">
+                        <span class="error" id="lblError"></span>
+                    </div>
+                  </div>
+                      <div class="form-group">
+                    <label class="col-sm-2 control-label">Address</label>
+                    <div class="col-sm-10">
+                        <textarea required name="address" class="form-control round-input" style="width:80%;"></textarea>
+                    </div>
+                  </div>
+                        <div class="form-group">
+                    <label class="col-sm-2 control-label">Pincode</label>
+                    <div class="col-sm-10">
+                         <input type="text" name="pincode" required maxlength="6" pattern="[0-9]{6}$"
+                                class="form-control round-input" style="width:80%;">
+                    </div>
+                  </div>
+                      <div class="form-group">
+                    <label class="col-sm-2 control-label">Mobile Number</label>
+                    <div class="col-sm-10">
+                      <input type="tel" pattern="[6-9]{1}[0-9]{9}" oninput="this.setCustomValidity('')" style="width:80%;"
+                            oninvalid="this.setCustomValidity('Enter your Number')" required maxlength="10" name="mno" class="form-control round-input">
+                    </div>
+                  </div>
+                       <div class="form-group">
+                    <label class="col-sm-2 control-label">State/UT</label>
+                    <div class="col-sm-10">
+                      <select name="state" id="state" class="form-control round-input" style="width:80%;"
+                              required onchange="st(this.id,'Constituency')" oninvalid="this.setCustomValidity('Select State')">
+                              <option value="">State</option>
+                            <option value="ABIA STATE">ABIA STATE</option>
+                            <option value="ADAMAWA STATE">ADAMAWA STATE</option>
+                            <option value="AKWA IBOM STATE">AKWA IBOM STATE</option>
+                            <option value="ANAMBRA STATE">ANAMBRA STATE</option>
+                            <option value="BAUCHI STATE">BAUCHI STATE</option>
+                            <option value="BAYELSA STATE">BAYELSA STATE</option>
+                            <option value="BENUE STATE">BENUE STATE</option>
+                            <option value="BORNO STATE">BORNO STATE</option>
+                            <option value="CROSS RIVER STATE">CROSS RIVER STATE</option>
+                            <option value="DELTA STATE">DELTA STATE</option>
+                            <option value="OYO STATE">OYO STATE</option>
+                            <option value="EBONYI STATE">EBONYI STATE</option>
+                            <option value="ENUGU STATE">ENUGU STATE</option>
+                            <option value="EDO STATE">EDO STATE</option>
+                            <option value="EKITI STATE">EKITI STATE</option>
+                            <option value="GOMBE STATE">GOMBE STATE</option>
+                            <option value="IMO STATE">IMO STATE</option>
+                            <option value="JIGAWA STATE">JIGAWA STATE</option>
+                            <option value="KADUNA STATE">KADUNA STATE</option>
+                            <option value="KANO STATE">KANO STATE</option>
+                            <option value="KATSINA STATE">KATSINA STATE</option>
+                            <option value="KEBBI STATE">KEBBI STATE</option>
+                            <option value="KOGI STATE">KOGI STATE</option>
+                            <option value="KWARA STATE">KWARA STATE</option>
+                            <option value="LAGOS STATE">LAGOS STATE</option>
+                            <option value="NASARAWA STATE">NASARAWA STATE</option>
+                            <option value="NIGER STATE">NIGER STATE</option>
+                            <option value="OGUN STATE">OGUN STATE</option>
+                            <option value="ONDO STATE">ONDO STATE</option>
+                            <option value="OSUN STATE">OSUN STATE</option>
+                            <option value="PLATEAU STATE">PLATEAU STATE</option>
+                            <option value="RIVERS STATE">RIVERS STATE</option>
+                            <option value="SOKOTO STATE">SOKOTO STATE</option>
+                            <option value="TARABA STATE">TARABA STATE</option>
+                            <option value="YOBE STATE">YOBE STATE</option>
+                            <option value="ZAMFARA STATE">ZAMFARA STATE</option>
+                        </select>
+                    </div>
+                  </div>
+                       <div class="form-group">
+                    <label class="col-sm-2 control-label"> Constituency Type</label>
+                    <div class="col-sm-10">
+                      <select name="Constituency" class="form-control round-input" style="width:80%;" required
+                              oninvalid="this.setCustomValidity('Select  Constituency type')"
+                              id="Constituency" onchange="st2(this.id,'Constituency1')">
+                            <option value="">Select a Constituency Type</option>
+                        </select>
+                    </div>
+                  </div>
+                      <div class="form-group">
+                    <label class="col-sm-2 control-label">Candidate Constituency</label>
+                    <div class="col-sm-10">
+                     <select name="Constituency1" class="form-control round-input" style="width:80%;" required
+                             id="Constituency1"  oninvalid="this.setCustomValidity('Select candidate Constituency')">
+                            <option value=""> Constituency</option>
+                        </select>
+                    </div>
+                  </div>
+                      <div class="form-group">
+                    <label class="col-sm-2 control-label">Candidate Image</label>
+                          <div class="col-lg-2 col-sm-2">
+                            <div class="follow-ava2" style="position: relative; left:50px;">
+                                <img id="output" src="{% static 'images/user.png' %}"
+                                     style="max-height:150px; max-width: 150px; min-width: 150px; min-height: 150px;
+                                     border-top-left-radius: 50% 50%;
+                                         border-top-right-radius: 50% 50%;
+                                         border-bottom-left-radius: 50% 50%;
+                                         border-bottom-right-radius: 50% 50%;">
+                            </div>
+                          </div>
+                    <div class="col-sm-10">
+                      <input type="file" required accept="image/*" name="cphoto" onchange="loadfile(event)" style="position: relative; left: 90px;" >
+                        <script>
+                            var loadfile = function(event){
+                                var output = document.getElementById('output');
+                                output.src = URL.createObjectURL(event.target.files[0]);
+                                output.onload = function(){
+                                    URL.revokeObjectURL(output.src)
+                                }
+                            };
+                        </script>
+                    </div>
+                  </div>
+                      <div class="form-group">
+                    <label class="col-sm-2 control-label">Candidate Party</label>
+                    <div class="col-sm-10">
+                      <input type="text" name="party"  required class="form-control round-input" oninput="this.setCustomValidity('')"
+                            oninvalid="this.setCustomValidity('Enter candidate party Name')" style="width:80%;">
+                    </div>
+                    </div>
+                       <div class="form-group">
+                    <label class="col-sm-2 control-label">Party Image</label>
+                          <div class="col-lg-2 col-sm-2">
+                            <div class="follow-ava2" style="position: relative; left:50px;">
+                                <img id="output2" src="{% static 'images/user.png' %}"
+                                     style="max-height:150px; max-width: 150px; min-width: 150px; min-height: 150px;
+                                     border-top-left-radius: 50% 50%;
+                                         border-top-right-radius: 50% 50%;
+                                         border-bottom-left-radius: 50% 50%;
+                                         border-bottom-right-radius: 50% 50%;">
+                            </div>
+                          </div>
+                    <div class="col-sm-10">
+                      <input type="file" required accept="image/*" name="pphoto"  onchange="loadfile1(event)" style="position: relative; left: 90px;" >
+                        <script>
+                            var loadfile1 = function(event){
+                                var output = document.getElementById('output2');
+                                output.src = URL.createObjectURL(event.target.files[0]);
+                                output.onload = function(){
+                                    URL.revokeObjectURL(output.src)
+                                }
+                            };
+                        </script>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Candidate Application Form</label>
+                    <div class="col-sm-10">
+                      <input type="file" name="affidavit" required accept="application/pdf" style="width:80%;">
+                    </div>
+                    </div>
+                <div class="form-group">
+                      <div class="col-lg-offset-2 col-lg-10">
+                        <button class="btn btn-primary" type="submit">Add Candidate</button>
+                        <button class="btn btn-default" type="reset">Reset</button>
+                      </div>
+                    </div>
+                      <div class="form-group">
+                      <div class="col-lg-offset-2 col-lg-10">
+                        {% for message in messages %}
+                            <h3 style="color: green;"> {{message}} </h3>
+                            {% endfor %}
+                      </div>
+                    </div>
+                </form>
+              </div>
+            </section>
+            </div>
+          </div>
+      </section>
+      </section>
+</body>
+ {% endblock content %}

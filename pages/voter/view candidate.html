@@ -1,0 +1,652 @@
+ {% extends 'voter/master2.html' %}
+ {% block title %}  home {% endblock title %}
+ {% load static %}
+ {% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Candidate</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+  <title>Digital_Voting</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link href="{% static 'css/bootstrap-theme.css' %}" rel="stylesheet">
+  <!--external css-->
+  <!-- font icon -->
+  <link href="{% static 'css/elegant-icons-style.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+  <!-- full calendar css-->
+  <link href="{% static 'assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css' %}" rel="stylesheet" />
+  <link href="{% static 'assets/fullcalendar/fullcalendar/fullcalendar.css' %}" rel="stylesheet" />
+  <!-- easy pie chart-->
+  <link href="{% static 'assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css' %}" rel="stylesheet" type="text/css" media="screen" />
+  <!-- owl carousel -->
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" type="text/css">
+  <link href="{% static 'css/jquery-jvectormap-1.2.2.cs' %}s" rel="stylesheet">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="{% static 'css/fullcalendar.css' %}">
+  <link href="{% static 'css/widgets.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style-responsive.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/xcharts.min.css' %}" rel=" stylesheet">
+  <link href="{% static 'css/jquery-ui-1.10.4.min.css' %}" rel="stylesheet">
+<script>
+        function st(s1,s2)
+            {
+                var s1 = document.getElementById(s1);
+                var s2 = document.getElementById(s2);
+                s2.innerHTML = "";
+                if(s1.value == "ANDAMAN AND NICOBAR ISLANDS","GOA","GUJARAT","ANDHRA PRADESH","ARUNACHAL PRADESH","ASSAM","BIHAR","CHANDIGARH","CHHATTISGARH","DADRA &amp; NAGAR HAVELI","DAMAN &amp; DIU","HARYANA","HIMACHAL PRADESH","JAMMU & KASHMIR","JHARKHAND","KARNATAKA","KERALA","LAKSHADWEEP","MADHYA PRADESH","MAHARASHTRA","MEGHALAYA","MIZORAM","NAGALAND","NCT OF DELHI ","ODISHA","PUDUCHERRY","PUNJAB","RAJASTHAN","SIKKIM","TAMIL NADU","TELANGANA","TRIPURA","UTTAR PRADESH","UTTARAKHAND","WEST BENGAL")
+                    {
+                       var optionArray = ["|","Parliamentary|Parliamentary","Assembly|Assembly"];
+                    }
+                for(var option in optionArray)
+                    {
+                        var pair = optionArray[option].split("|");
+                        var newOption = document.createElement("option");
+                        newOption.value = pair[0];
+                        newOption.innerHTML = pair[1];
+                        s2.options.add(newOption);
+                     }
+            }
+       function st2(s2,s3)
+            {
+                var s1 = document.getElementById("states");
+                var s2 = document.getElementById(s2);
+                var s3 = document.getElementById(s3);
+                s3.innerHTML = "";
+                if(s1.value == "ANDAMAN AND NICOBAR ISLANDS")
+                    {
+                       var optionArray1 = ["|"];
+                    }
+                 else if(s1.value == "ANDHRA PRADESH")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                                var optionArray1 = ["|","araku|Araku","srikakulam|Srikakulam","vizianagaram|Vizianagaram","visakhapatnam|Visakhapatnam",
+                               "anakapalli|Anakapalli","kakinada|Kakinada","Amalapuram|Amalapuram","Rajahmundry|Rajahmundry",
+                               "Narasapuram|Narasapuram",	"Eluru|Eluru",	"Machilipatnam|Machilipatnam","Vijayawada|Vijayawada",
+                               "Guntur|Guntur","Narasaraopet|Narasaraopet","Bapatla|Bapatla","Ongole|Ongole","Nandyal|Nandyal",
+                               "Kurnool|Kurnool","Anantapur|Anantapur","Hindupur|Hindupur","Kadapa|Kadapa","Nellore|Nellore",];
+                           }
+                       else{
+                               var optionArray1=["|","Tirupati|Tirupati",
+                               "Rajampet|Rajampet","Chittoor|Chittoor"]
+                           }
+                   }
+                  else if(s1.value == "ARUNACHAL PRADESH")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+
+                   }
+                 else if(s1.value == "ASSAM")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                                var optionArray1 = ["|","Karimganj|Karimganj","Silchar|Silchar","Autonomous District|Autonomous District","Dhubri|Dhubri",
+                                               "Kokrajhar|Kokrajhar","Barpeta|Barpeta","auhati|Gauhati","Mangaldoi|Mangaldoi","Tezpur|Tezpur",
+                                               "Nowgong|Nowgong","Kaliabor|Kaliabor","Jorhat|Jorhat","Dibrugarh|Dibrugarh","Lakhimpur|Lakhimpur"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "BIHAR")
+                   {
+                        if(s2.value == "Parliamentary")
+                           {
+                                var optionArray1 = ["|","Valmiki Nagar|Valmiki Nagar","Paschim Champaran|Paschim Champaran",
+                                               "Purvi Champaran|Purvi Champaran","Sheohar|Sheohar","Sitamarhi|Sitamarhi","Madhubani|Madhubani",
+                                               "Jhanjharpur|Jhanjharpur","Supaul|Supaul","Araria|Araria","Kishanganj|Kishanganj",
+                                               "Katihar|Katihar","Purnia|Purnia","Madhepura|Madhepura", "Darbhanga|Darbhanga",
+                                               "Muzaffarpur|Muzaffarpur","Vaishali|Vaishali","Gopalganj|Gopalganj","Siwan|Siwan",
+                                               "Maharajganj|Maharajganj",
+                                               "Saran|Saran",
+                                               "Hajipur|Hajipur",
+                                               "Ujiarpur|Ujiarpur",
+                                               "Samastipur|Samastipur",
+                                               "Begusarai|Begusarai",
+                                               "Khagaria|Khagaria",
+                                               "Bhagalpur|Bhagalpur",
+                                               "Banka|Banka",
+                                               "Munger|Munger",
+                                               "Nalanda|Nalanda",
+                                               "Patna Sahib|Patna Sahib",
+                                               "Pataliputra|Pataliputra",
+                                               "Arrah|Arrah",
+                                               "Buxar|Buxar",
+                                               "Sasaram|Sasaram",
+                                               "Karakat|Karakat",
+                                               "Jahanabad|Jahanabad",
+                                               "Aurangabad|Aurangabad",
+                                               "Gaya|Gaya",
+                                               "Nawada|Nawada",
+                                               "Jamui|Jamui"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                  else if(s1.value == "CHANDIGARH")
+                   {
+                        if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Sarguja|Sarguja","Raigarh|Raigarh","Janjgir|Janjgir","Korba|Korba","Bilaspur|Bilaspur",
+                                               "Rajnandgaon|Rajnandgaon","Durg|Durg","Raipur|Raipur","Mahasamund|Mahasamund",
+                                               "Bastar|Bastar","Kanker|Kanker"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+
+                   }
+                else if(s1.value == "CHHATTISGARH")
+                   {
+                        if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                   else if(s1.value == "DADRA &amp; NAGAR HAVELI")
+                   {
+                        if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                   else if(s1.value == "DAMAN &amp; DIU")
+                   {
+                        if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                   else if(s1.value == "GOA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                                var optionArray1 = ["|","North Goa|North Goa","South Goa|South Goa"];
+                           }
+                       else{
+                               var optionArray1=["|","Tirupati|Tirupati",
+                               "Rajampet|Rajampet","Chittoor|Chittoor"]
+                           }
+
+                   }
+                   else if(s1.value == "OYO STATE")
+                   {
+                        if(s2.value == "Presidential")
+                           {
+                                var optionArray1 = ["|","Akinyele Moniya LGA|Akinyele Moniya LGA", "Afijio Jobele LGA|Afijio Jobele LGA", "Ibadan North Agodi Gate LGA|Ibadan North Agodi Gate LGA",	"Ibadan North-East Iwo Road LGA|Ibadan North-East Iwo Road LGA",
+                                "Ibadan North-West LGA|Ibadan North-West LGA","Ibadan South-West Ring Road LGA|Ibadan South-West Ring Road LGA","Ibadan South-East Mapo LGA|Ibadan South-East Mapo LGA",	
+                                "Ibarapa North LGA|Ibarapa North LGA","Ibarapa Central LGA|Ibarapa Central LGA","Ibarapa East Eruwa LGA|Ibarapa East Eruwa LGA",	
+                                "Ido LGA|Ido LGA","Irepo LGA|Irepo LGA", "Iseyin LGA|Iseyin LGA","Kajola LGA|Kajola LGA",	
+                                "Lagelu LGA|Lagelu LGA","Ogbomoso North LGA|Ogbomoso North LGA", "Ogbomoso South LGA|Ogbomoso South LGA","Oyo West Ojongbodu LGA|Oyo West Ojongbodu LGA",	
+                                "Atiba Ofa Meta LGA|Atiba Ofa Meta LGA","Atisbo Tede LGA|Atisbo Tede LGA","Saki West LGA|Saki West LGA","Itesiwaju Otu LGA|Itesiwaju Otu LGA",	
+                                "Iwajowa LGA|Iwajowa LGA","Olorunsogo LGA|Olorunsogo LGA","Oluyole LGA|Oluyole LGA","Ogo Oluwa LGA|Ogo Oluwa LGA","Surulere LGA|Surulere LGA","Orelope LGA|Orelope LGA",
+                                "Ori Ire LGA|Ori Ire LGA","Oyo East  LGA|Oyo East  LGA","Ona Ara LGA|Ona Ara LGA"];
+                           }
+                       else
+                           {
+                            var optionArray1 = ["|","Akinyele Moniya LGA|Akinyele Moniya LGA", "Afijio Jobele LGA|Afijio Jobele LGA", "Ibadan North Agodi Gate LGA|Ibadan North Agodi Gate LGA",	"Ibadan North-East Iwo Road LGA|Ibadan North-East Iwo Road LGA",
+                            "Ibadan North-West LGA|Ibadan North-West LGA","Ibadan South-West Ring Road LGA|Ibadan South-West Ring Road LGA","Ibadan South-East Mapo LGA|Ibadan South-East Mapo LGA",	
+                            "Ibarapa North LGA|Ibarapa North LGA","Ibarapa Central LGA|Ibarapa Central LGA","Ibarapa East Eruwa LGA|Ibarapa East Eruwa LGA",	
+                            "Ido LGA|Ido LGA","Irepo LGA|Irepo LGA", "Iseyin LGA|Iseyin LGA","Kajola LGA|Kajola LGA",	
+                            "Lagelu LGA|Lagelu LGA","Ogbomoso North LGA|Ogbomoso North LGA", "Ogbomoso South LGA|Ogbomoso South LGA","Oyo West Ojongbodu LGA|Oyo West Ojongbodu LGA",	
+                            "Atiba Ofa Meta LGA|Atiba Ofa Meta LGA","Atisbo Tede LGA|Atisbo Tede LGA","Saki West LGA|Saki West LGA","Itesiwaju Otu LGA|Itesiwaju Otu LGA",	
+                            "Iwajowa LGA|Iwajowa LGA","Olorunsogo LGA|Olorunsogo LGA","Oluyole LGA|Oluyole LGA","Ogo Oluwa LGA|Ogo Oluwa LGA","Surulere LGA|Surulere LGA","Orelope LGA|Orelope LGA",
+                            "Ori Ire LGA|Ori Ire LGA","Oyo East  LGA|Oyo East  LGA","Ona Ara LGA|Ona Ara LGA"];
+
+
+
+                           }
+                   }
+                   else if(s1.value == "HARYANA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                                var optionArray1 = ["|","Ambala|Ambala","Kurukshetra|Kurukshetra", "Sirsa|Sirsa","Hissar|Hissar", "Karnal|Karnal",
+                                               "Sonipat|Sonipat","Rohtak|Rohtak", "Bhiwani–Mahendragarh|Bhiwani–Mahendragarh",
+                                               "Gurgaon|Gurgaon","Faridabad|Faridabad"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                   else if(s1.value == "HIMACHAL PRADESH")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+
+                       var optionArray1 = ["|","Kangra|Kangra",
+                                               "Mandi|Mandi",
+                                               "Hamirpur|Hamirpur",
+                                               "Shimla|Shimla"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                   else if(s1.value == "JAMMU & KASHMIR")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       var optionArray1 = ["|",];
+                   }
+                   else if(s1.value == "JHARKHAND")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       var optionArray1 = ["|",];
+                   }
+                else if(s1.value == "KARNATAKA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                              var optionArray1 = ["|",];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+
+                   }
+                 else if(s1.value == "KERALA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+
+                       var optionArray1 = ["|","Kasaragod|Kasaragod", "Kannur|Kannur","Vatakara|Vatakara","Wayanad|Wayanad", "Kozhikode|Kozhikode",
+                                               "Malappuram|Malappuram","Ponnani|Ponnani","Palakkad|Palakkad","Alathur|Alathur","Thrissur|Thrissur",
+                                               "Chalakudy|Chalakudy","Ernakulam|Ernakulam","Idukki|Idukki","Kottayam|Kottayam", "Alappuzha|Alappuzha","Mavelikara|Mavelikara","Pathanamthitta|Pathanamthitta","Kollam|Kollam",
+                                               "Attingal|Attingal","Thiruvananthapuram|Thiruvananthapuram"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "LAKSHADWEEP")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "MADHYA PRADESH")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "MAHARASHTRA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "MANIPUR")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","Inner Manipur|Inner Manipur","Outer Manipur|Outer Manipur"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "MEGHALAYA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","Shillong|Shillong","Tura|Tura"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "MIZORAM")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","MIZORAM|MIZORAM"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "NAGALAND")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","NAGALAND|NAGALAND"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "NCT OF DELHI ")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "ODISHA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+
+                 else if(s1.value == "PUDUCHERRY")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "PUNJAB")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "RAJASTHAN")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "SIKKIM")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","SIKKIM|SIKKIM"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "TAMIL NADU")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "TELANGANA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "TRIPURA")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","Tripura West|Tripura West","Tripura East|Tripura East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "UTTAR PRADESH")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "UTTARAKHAND")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                       var optionArray1 = ["|","Tehri Garhwal|Tehri Garhwal",
+                                               "Garhwal|Garhwal",
+                                               "Almora|Almora",
+                                               "Nainital–Udhamsingh Nagar|Nainital–Udhamsingh Nagar",
+                                               "Haridwar|Haridwar"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                 else if(s1.value == "WEST BENGAL")
+                   {
+                       if(s2.value == "Parliamentary")
+                           {
+                               var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                       else
+                           {
+                                var optionArray1 = ["|","Arunachal West|Arunachal West","Arunachal East|Arunachal East"];
+                           }
+                   }
+                for(var option in optionArray1)
+                    {
+                        var pair = optionArray1[option].split("|");
+                        var newOption = document.createElement("option");
+                        newOption.value = pair[0];
+                        newOption.innerHTML = pair[1];
+                        s3.options.add(newOption);
+                     }
+            }
+        </script>
+</head>
+<body>
+<section id="main-content" style="margin-left:0px;margin-top: 60px;">
+      <section class="wrapper" style="margin-top:60px;">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-file-text-o"></i>List of candidate</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <div class="panel-body">
+                <form class="form-horizontal" action="vview_candidate" id="CandidateCustomFilter"  method="POST">
+                    {% csrf_token %}
+                      <div class="form-group">
+                    <label class="col-sm-2 control-label">State</label>
+                    <div class="col-sm-10">
+                        <select id="states" name="states" class="form-control"
+                                onchange="st(this.id,'constituency1')" style="width:80%;height:34px;" required>
+                        <option value="" selected="selected">Select State</option>
+                             <option value="ABIA STATE">ABIA STATE</option>
+                            <option value="ADAMAWA STATE">ADAMAWA STATE</option>
+                            <option value="AKWA IBOM STATE">AKWA IBOM STATE</option>
+                            <option value="ANAMBRA STATE">ANAMBRA STATE</option>
+                            <option value="BAUCHI STATE">BAUCHI STATE</option>
+                            <option value="BAYELSA STATE">BAYELSA STATE</option>
+                            <option value="BENUE STATE">BENUE STATE</option>
+                            <option value="BORNO STATE">BORNO STATE</option>
+                            <option value="CROSS RIVER STATE">CROSS RIVER STATE</option>
+                            <option value="DELTA STATE">DELTA STATE</option>
+                            <option value="OYO STATE">OYO STATE</option>
+                            <option value="EBONYI STATE">EBONYI STATE</option>
+                            <option value="ENUGU STATE">ENUGU STATE</option>
+                            <option value="EDO STATE">EDO STATE</option>
+                            <option value="EKITI STATE">EKITI STATE</option>
+                            <option value="GOMBE STATE">GOMBE STATE</option>
+                            <option value="IMO STATE">IMO STATE</option>
+                            <option value="JIGAWA STATE">JIGAWA STATE</option>
+                            <option value="KADUNA STATE">KADUNA STATE</option>
+                            <option value="KANO STATE">KANO STATE</option>
+                            <option value="KATSINA STATE">KATSINA STATE</option>
+                            <option value="KEBBI STATE">KEBBI STATE</option>
+                            <option value="KOGI STATE">KOGI STATE</option>
+                            <option value="KWARA STATE">KWARA STATE</option>
+                            <option value="LAGOS STATE">LAGOS STATE</option>
+                            <option value="NASARAWA STATE">NASARAWA STATE</option>
+                            <option value="NIGER STATE">NIGER STATE</option>
+                            <option value="OGUN STATE">OGUN STATE</option>
+                            <option value="ONDO STATE">ONDO STATE</option>
+                            <option value="OSUN STATE">OSUN STATE</option>
+                            <option value="PLATEAU STATE">PLATEAU STATE</option>
+                            <option value="RIVERS STATE">RIVERS STATE</option>
+                            <option value="SOKOTO STATE">SOKOTO STATE</option>
+                            <option value="TARABA STATE">TARABA STATE</option>
+                            <option value="YOBE STATE">YOBE STATE</option>
+                            <option value="ZAMFARA STATE">ZAMFARA STATE</option>
+            </select>
+                    </div>
+                  </div>
+                      <div class="form-group">
+                    <label class="col-sm-2 control-label">Constituency Type</label>
+                    <div class="col-sm-10">
+                          <select name="constituency1" class="form-control" id="constituency1" onchange="st2(this.id,'Constituency2')" style="width:80%;height:34px;" required>
+                            <option value="">Select Constituency Type</option>
+                          </select>
+                    </div>
+                  </div>
+                    <div class="form-group">
+                    <label class="col-sm-2 control-label">Constituency</label>
+                    <div class="col-sm-10">
+                         <select name="constituency2" class="form-control" id="Constituency2" style="width:80%;height:34px;" required>
+                             <option value="">Select Constituency</option>
+                            </select>
+                    </div>
+                  </div>
+                    <div class="form-group">
+                      <div class="col-lg-offset-2 col-lg-10">
+                        <button class="btn btn-primary" name="view_candidate" type="submit">Filter</button>
+                      </div>
+                    </div>
+                </form>
+              </div>
+            </section>
+          </div>
+        </div>
+           {% for candidate in candidates %}
+          <div class="row">
+          <div class="col-lg-12">
+              <div class="profile-widget profile-widget-info">
+              <div class="panel-body"  style="background-color: rgba(6, 12, 34, 0.98);">
+                <div class="col-lg-2 col-sm-2 mt-4">
+                  <div class="follow-ava">
+                     <a><img src="{{candidate.candidate_image.url}}" alt="" class="het-90"></a>
+                  </div>
+                 <p><strong>{{candidate.name}}</strong></p>
+                </div>
+                <div class="col-lg-4 col-sm-4 follow-info">
+                    <p><strong>State :</strong> {{candidate.state}}</p>
+                    <p><strong>Constituency Type:</strong> {{candidate.constituency}}</p>
+                    <p><strong>Constituency:</strong> {{constituency}}</p>
+                    <p><strong>Party :</strong> {{candidate.candidate_party}}</p>
+                    <p><strong><a href="{{candidate.affidavit.url}}" target="_blank">Download Affidavit</a></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+             {% endfor %}
+              <div>
+        {% for message in messages %}
+        <h3 align="center">{{message}}</h3>
+        {% endfor %}
+    </div>
+      </section>
+         </section>
+    </body>
+</html>
+
+ {% endblock content %}
