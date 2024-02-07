@@ -57,23 +57,23 @@ def add_voter(request):
     if (request.method == 'POST'):
         voterid_no = request.POST['vid']
         name = request.POST['name']
-        father_name = request.POST['fname']
+        surname = request.POST['sname']
         gender = request.POST['gender']
         dateofbirth = request.POST['dob']
         address = request.POST['address']
         mobile_no = request.POST['mno']
         state = request.POST['state']
         pincode = request.POST['pincode']
-        parliamentary = request.POST['ParliamentaryConstituency']
-        assembly = request.POST['AssemblyConstituency']
+        lga = request.POST['lga']
+        ward= request.POST['ward']
         voter_image = request.FILES['vphoto']
         if (Voters.objects.filter(voterid_no=voterid_no).exists()):
             messages.info(request, 'voter id already registered')
             return render(request, 'admin/addvoter.html',{'username':adminhome.username,'image':adminhome.adminimage})
         else:
-            add_voter = Voters(voterid_no=voterid_no, name=name, father_name=father_name, gender=gender,
+            add_voter = Voters(voterid_no=voterid_no, name=name, surname=surname, gender=gender,
                                dateofbirth=dateofbirth, address=address, mobile_no=mobile_no, state=state,
-                               pincode=pincode, parliamentary=parliamentary, assembly=assembly, voter_image=voter_image)
+                               pincode=pincode, lga=lga, ward=ward, voter_image=voter_image)
             add_voter.save()
             messages.info(request, 'voter added')
             return render(request, 'admin/addvoter.html',{'username':adminhome.username,'image':adminhome.adminimage})
@@ -91,7 +91,7 @@ def add_candidate(request):
     if request.method == 'POST':
         candidate_id = request.POST['cid']
         name = request.POST['name']
-        father_name = request.POST['fname']
+        surname = request.POST['sname']
         gender = request.POST['gender']
         dateofbirth = request.POST['dob']
         address = request.POST['address']
@@ -99,10 +99,10 @@ def add_candidate(request):
         state = request.POST['state']
         pincode = request.POST['pincode']
         constituency = request.POST['Constituency']
-        if constituency == "Parliamentary":
-            parliamentary = request.POST['Constituency1']
+        if constituency == "lga":
+            lga = request.POST['Constituency1']
         else:
-            assembly = request.POST['Constituency1']
+            ward= request.POST['Constituency1']
         candidate_party = request.POST['party']
         candidate_image = request.FILES['cphoto']
         party_image = request.FILES['pphoto']
@@ -111,17 +111,17 @@ def add_candidate(request):
             messages.info(request, 'candidate id already registered')
             return render(request, 'admin/add candidate.html',{'username':adminhome.username,'image':adminhome.adminimage})
         else:
-            if constituency == "Parliamentary":
-                add_candidate = Candidates(candidate_id=candidate_id, name=name, father_name=father_name, gender=gender,
+            if constituency == "lga":
+                add_candidate = Candidates(candidate_id=candidate_id, name=name, surname=surname, gender=gender,
                                            dateofbirth=dateofbirth, address=address, mobile_no=mobile_no, state=state,
-                                           pincode=pincode, constituency=constituency, parliamentary=parliamentary,
+                                           pincode=pincode, constituency=constituency, lga=lga,
                                            candidate_party=candidate_party, candidate_image=candidate_image,
                                            party_image=party_image,affidavit=affidavit)
                 add_candidate.save()
             else:
-                add_candidate = Candidates(candidate_id=candidate_id, name=name, father_name=father_name, gender=gender,
+                add_candidate = Candidates(candidate_id=candidate_id, name=name, surname=surname, gender=gender,
                                            dateofbirth=dateofbirth, address=address, mobile_no=mobile_no, state=state,
-                                           pincode=pincode, constituency=constituency, assembly=assembly,
+                                           pincode=pincode, constituency=constituency, ward=ward,
                                            candidate_party=candidate_party, candidate_image=candidate_image,
                                            party_image=party_image,affidavit=affidavit)
                 add_candidate.save()
@@ -135,6 +135,8 @@ def generateelection(request):
     return render(request, 'admin/generateelection.html',{'username':adminhome.username,'image':adminhome.adminimage})
 
 
+from django.contrib.admin.views.decorators import staff_member_required
+
 @login_required(login_url='home')
 @staff_member_required(login_url='home')
 def generate_election(request):
@@ -147,47 +149,45 @@ def generate_election(request):
         end_date = request.POST['edate']
         end_time = request.POST['etime']
         status = 'active'
-        if (Election.objects.filter(election_id=election_id).exists()):
-            messages.info(request, 'election id already registered')
-            return render(request, 'admin/generateelection.html',{'username':adminhome.username,'image':adminhome.adminimage})
+
+        if Election.objects.filter(election_id=election_id).exists():
+            messages.info(request, 'Election ID already registered')
+            return render(request, 'admin/generateelection.html', {'username': adminhome.username, 'image': adminhome.adminimage})
+
+        generate_election = Election(election_id=election_id, election_type=election_type, state=state,
+                                     start_date=start_date, start_time=start_time, end_date=end_date,
+                                     end_time=end_time, status=status)
+        generate_election.save()
+
+        if election_type == 'President':
+            candidates = Candidates.objects.filter(state=state, constituency='lga')
         else:
-            generate_election = Election(election_id=election_id, election_type=election_type, state=state,
-                                         start_date=start_date, start_time=start_time, end_date=end_date,
-                                         end_time=end_time,
-                                         status=status)
-            generate_election.save()
-            if election_type == 'Presidential':
-                c = Candidates.objects.filter(state=state, constituency='Parliamentary')
-                for i in c:
-                    candidates_votes = Votes(election_id=election_id, candidate_id=i.candidate_id,
-                                             candidate_name=i.name, candidate_party=i.candidate_party, state=i.state,
-                                             constituency=i.parliamentary)
-                    candidates_votes.save()
-                has_voted = 'no'
-                #Voted.objects.filter(state=state).delete()
-                v = Voters.objects.filter(state=state)
-                for i in v:
-                    voters_voted = Voted(election_id=election_id, voter_id=i.voterid_no, state=i.state, constituency=i.parliamentary,
-                                         has_voted=has_voted)
-                    voters_voted.save()
-                messages.info(request, 'election generated')
-                return render(request, 'admin/generateelection.html',{'username':adminhome.username,'image':adminhome.adminimage})
+            candidates = Candidates.objects.filter(state=state, constituency='Assembly')
+
+        for candidate in candidates:
+            candidates_votes = Votes(election_id=election_id, candidate_id=candidate.candidate_id,
+                                     candidate_name=candidate.name, candidate_party=candidate.candidate_party,
+                                     state=candidate.state, constituency=candidate.lga)
+            candidates_votes.save()
+
+        has_voted = 'no'
+        # Voted.objects.filter(state=state).delete()
+        voters = Voters.objects.filter(state=state)
+
+        for voter in voters:
+            if election_type == 'Governor':
+                voters_voted = Voted(election_id=election_id, voter_id=voter.voterid_no, state=voter.state,
+                                     constituency=voter.lga, has_voted=has_voted)
             else:
-                c = Candidates.objects.filter(state=state, constituency='Assembly')
-                for i in c:
-                    candidates_votes = Votes(election_id=election_id, candidate_id=i.candidate_id,
-                                             candidate_name=i.name, candidate_party=i.candidate_party, state=i.state,
-                                             constituency=i.parliamentary)
-                    candidates_votes.save()
-                has_voted = 'no'
-                #Voted.objects.filter(state=state).delete()
-                v = Voters.objects.filter(state=state)
-                for i in v:
-                    voters_voted = Voted(election_id=election_id, voter_id=i.voterid_no, state=i.state, constituency=i.assembly,
-                                         has_voted=has_voted)
-                    voters_voted.save()
-                messages.info(request, 'election generated')
-                return render(request, 'admin/generateelection.html',{'username':adminhome.username,'image':adminhome.adminimage})
+                voters_voted = Voted(election_id=election_id, voter_id=voter.voterid_no, state=voter.state,
+                                     constituency=voter.ward, has_voted=has_voted)
+            voters_voted.save()
+
+        messages.info(request, 'Election generated')
+        return render(request, 'admin/generateelection.html', {'username': adminhome.username, 'image': adminhome.adminimage})
+
+    # Handle the case when the request method is not POST
+    return render(request, 'admin/generateelection.html', {'username': adminhome.username, 'image': adminhome.adminimage})
 
 
 @login_required(login_url='home')
@@ -510,15 +510,15 @@ def view_candidate(request):
         state = request.POST['states']
         constituency1 = request.POST['constituency1']
         constituency2 = request.POST['constituency2']
-        if constituency1 == 'Parliamentary':
-            candidates = Candidates.objects.filter(state=state, constituency=constituency1, parliamentary=constituency2)
+        if constituency1 == 'lga':
+            candidates = Candidates.objects.filter(state=state, constituency=constituency1, lga=constituency2)
             if candidates:
                 return render(request, 'admin/view candidate.html', {'constituency':constituency2,'candidates': candidates,'username':adminhome.username,'image':adminhome.adminimage})
             else:
                 messages.info(request, 'No Candidate Found')
                 return render(request, 'admin/view candidate.html',{'username':adminhome.username,'image':adminhome.adminimage})
         else:
-            candidates = Candidates.objects.filter(state=state, constituency=constituency1, assembly=constituency2)
+            candidates = Candidates.objects.filter(state=state, constituency=constituency1, ward=constituency2)
             if candidates:
                 return render(request, 'admin/view candidate.html', {'constituency':constituency2,'candidates': candidates,'username':adminhome.username,'image':adminhome.adminimage})
             else:
@@ -539,11 +539,11 @@ def view_voter(request):
         state = request.POST['states']
         constituency1 = request.POST['constituency1']
         constituency2 = request.POST['constituency2']
-        if constituency1 == 'Parliamentary':
-            voters = Voters.objects.filter(state=state, parliamentary=constituency2)
+        if constituency1 == 'lga':
+            voters = Voters.objects.filter(state=state, lga=constituency2)
             return render(request, 'admin/view voter.html', {'voters': voters,'username':adminhome.username,'image':adminhome.adminimage})
         else:
-            voters = Voters.objects.filter(state=state, assembly=constituency2)
+            voters = Voters.objects.filter(state=state, ward=constituency2)
             return render(request, 'admin/view voter.html', {'voters': voters,'username':adminhome.username,'image':adminhome.adminimage})
 
 
@@ -562,12 +562,12 @@ def edit_voter(request):
             if Voters.objects.filter(voterid_no=voter_id):
                 voter = Voters.objects.get(voterid_no=voter_id)
                 return render(request, 'admin/edit voterdetails.html', {'voterid_no': voter.voterid_no, 'name': voter.name,
-                                                                'father_name': voter.father_name, 'gender': voter.gender,
+                                                                'surname': voter.surname, 'gender': voter.gender,
                                                                 'dateofbirth': voter.dateofbirth, 'address': voter.address,
                                                                 'mobile_no': voter.mobile_no, 'state': voter.state,
                                                                 'pincode': voter.pincode,
-                                                                'parliamentary': voter.parliamentary,
-                                                                'assembly': voter.assembly, 'voter_image': voter.voter_image,'username':adminhome.username,'image':adminhome.adminimage})
+                                                                'lga': voter.lga,
+                                                                'ward': voter.ward, 'voter_image': voter.voter_image,'username':adminhome.username,'image':adminhome.adminimage})
             else:
                 messages.info(request,'Voter not found')
                 return render(request,'admin/edit voter.html',{'username':adminhome.username,'image':adminhome.adminimage})
@@ -589,22 +589,22 @@ def editvoterdetails(request):
     if request.method == 'POST':
         voterid_no = request.POST['vid']
         name = request.POST['name']
-        father_name = request.POST['fname']
+        surname = request.POST['sname']
         address = request.POST['address']
         mobile_no = request.POST['mno']
         state = request.POST['state']
         pincode = request.POST['pincode']
-        parliamentary = request.POST['ParliamentaryConstituency']
-        assembly = request.POST['AssemblyConstituency']
+        lga = request.POST['lga']
+        ward= request.POST['ward']
         evoter = Voters.objects.get(voterid_no=voterid_no)
         evoter.name = name
-        evoter.father_name = father_name
+        evoter.surname = surname
         evoter.address = address
         evoter.mobile_no = mobile_no
         evoter.state = state
         evoter.pincode = pincode
-        evoter.parliamentary = parliamentary
-        evoter.assmebly = assembly
+        evoter.lga = lga
+        evoter.assmebly = ward
         evoter.save()
         messages.info(request, 'voter details updated')
         return render(request, 'admin/edit voter.html',{'username':adminhome.username,'image':adminhome.adminimage})
@@ -624,24 +624,24 @@ def edit_candidate(request):
             candidate_id = request.POST['cid']
             if Candidates.objects.filter(candidate_id=candidate_id):
                 candidate = Candidates.objects.get(candidate_id=candidate_id)
-                if candidate.constituency == "Parliamentary":
+                if candidate.constituency == "lga":
                     return render(request, 'admin/edit candidatedetails.html',
                                 {'candidate_id': candidate.candidate_id, 'name': candidate.name,
-                                'father_name': candidate.father_name, 'gender': candidate.gender,
+                                'surname': candidate.surname, 'gender': candidate.gender,
                                 'dateofbirth': candidate.dateofbirth, 'address': candidate.address,
                                 'mobile_no': candidate.mobile_no, 'state': candidate.state,
                                 'pincode': candidate.pincode, 'constituency': candidate.constituency,
-                                'parliamentary': candidate.parliamentary,
+                                'lga': candidate.lga,
                                 'candidate_image': candidate.candidate_image, 'candidate_party': candidate.candidate_party,
                                 'party_image': candidate.party_image,'affidavit':candidate.affidavit,'username':adminhome.username,'image':adminhome.adminimage})
                 else:
                     return render(request, 'admin/edit candidatedetails.html',
                                 {'candidate_id': candidate.candidate_id, 'name': candidate.name,
-                                'father_name': candidate.father_name, 'gender': candidate.gender,
+                                'surname': candidate.surname, 'gender': candidate.gender,
                                 'dateofbirth': candidate.dateofbirth, 'address': candidate.address,
                                 'mobile_no': candidate.mobile_no, 'state': candidate.state,
                                 'pincode': candidate.pincode, 'constituency': candidate.constituency,
-                                'parliamentary': candidate.parliamentary,
+                                'lga': candidate.lga,
                                 'candidate_image': candidate.candidate_image, 'candidate_party': candidate.candidate_party,
                                 'party_image': candidate.party_image,'affidavit':candidate.affidavit,'username':adminhome.username,'image':adminhome.adminimage})
             else:
@@ -664,30 +664,30 @@ def editcandidatedetails(request):
     if request.method == 'POST':
         candidate_id = request.POST['cid']
         name = request.POST['name']
-        father_name = request.POST['fname']
+        surname = request.POST['sname']
         address = request.POST['address']
         mobile_no = request.POST['mno']
         state = request.POST['state']
         pincode = request.POST['pincode']
         constituency = request.POST['Constituency']
-        if constituency == "Parliamentary":
-            parliamentary = request.POST['Constituency1']
+        if constituency == "lga":
+            lga = request.POST['Constituency1']
         else:
-            assembly = request.POST['Constituency1']
+            ward= request.POST['Constituency1']
         candidate_party = request.POST['party']
         party_image = request.FILES['pphoto']
         ecandidate = Candidates.objects.get(candidate_id=candidate_id)
         ecandidate.name = name
-        ecandidate.father_name = father_name
+        ecandidate.surname = surname
         ecandidate.address = address
         ecandidate.mobile_no = mobile_no
         ecandidate.state = state
         ecandidate.pincode = pincode
         ecandidate.constituency = constituency
-        if constituency == "Parliamentary":
-            ecandidate.parliamentary = parliamentary
+        if constituency == "lga":
+            ecandidate.lga = lga
         else:
-            ecandidate.assembly = assembly
+            ecandidate.ward= ward
         ecandidate.candidate_party=candidate_party
         ecandidate.party_image=party_image
         ecandidate.save()

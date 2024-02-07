@@ -52,11 +52,11 @@ def otp(request):
             response_data = {'Message': 'Success'}
             return render(request, './register.html',
                           {'voterid_no': register_vid.v.voterid_no, 'name': register_vid.v.name,
-                           'father_name': register_vid.v.father_name, 'gender': register_vid.v.gender,
+                           'surname': register_vid.v.surname, 'gender': register_vid.v.gender,
                            'dateofbirth': register_vid.v.dateofbirth, 'address': register_vid.v.address,
                            'mobile_no': register_vid.v.mobile_no, 'state': register_vid.v.state,
-                           'pincode': register_vid.v.pincode, 'parliamentary': register_vid.v.parliamentary,
-                           'assembly': register_vid.v.assembly, 'voter_image': register_vid.v.voter_image})
+                           'pincode': register_vid.v.pincode, 'lga': register_vid.v.lga,
+                           'ward': register_vid.v.ward, 'voter_image': register_vid.v.voter_image})
         else:
             messages.info(request, 'Invalid OTP')
             return render(request, 'otp.html')
@@ -138,11 +138,11 @@ def vprofile(request):
     v = Voters.objects.get(voterid_no=v_id)
     vemail = User.objects.get(username=v_id)
     return render(request, 'voter/voter profile.html', {'voterid_no': v.voterid_no, 'name': v.name,
-                                                  'father_name': v.father_name, 'gender': v.gender,
+                                                  'surname': v.surname, 'gender': v.gender,
                                                   'dateofbirth': v.dateofbirth, 'address': v.address,
                                                   'mobile_no': v.mobile_no, 'state': v.state,
-                                                  'pincode': v.pincode, 'parliamentary': v.parliamentary,
-                                                  'assembly': v.assembly, 'voter_image': v.voter_image,
+                                                  'pincode': v.pincode, 'lga': v.lga,
+                                                  'ward': v.ward, 'voter_image': v.voter_image,
                                                   'email': vemail.email,'username':vhome.username,'image':vhome.image})
 
 
@@ -186,55 +186,66 @@ def vview_candidate(request):
         state = request.POST['states']
         constituency1 = request.POST['constituency1']
         constituency2 = request.POST['constituency2']
-        if constituency1 == 'Parliamentary':
-            candidates = Candidates.objects.filter(state=state, constituency=constituency1, parliamentary=constituency2)
+        if constituency1 == 'lga':
+            candidates = Candidates.objects.filter(state=state, constituency=constituency1, lga=constituency2)
             if candidates:
                 return render(request, 'voter/view candidate.html', {'constituency':constituency2,'candidates': candidates,'username':vhome.username,'image':vhome.image})
             else:
                 messages.info(request, 'No Candidate Found')
                 return render(request, 'voter/view candidate.html',{'username':vhome.username,'image':vhome.image})
         else:
-            candidates = Candidates.objects.filter(state=state, constituency=constituency1, assembly=constituency2)
+            candidates = Candidates.objects.filter(state=state, constituency=constituency1, ward=constituency2)
             if candidates:
                 return render(request, 'voter/view candidate.html', {'constituency':constituency2,'candidates': candidates,'username':vhome.username,'image':vhome.image})
             else:
                 messages.info(request, 'No Candidate Found')
                 return render(request, 'voter/view candidate.html',{'username':vhome.username,'image':vhome.image})
-
 
 @login_required(login_url='home')
 def velection(request):
-    v_id = request.session['v_id']
-    vdetail = Voters.objects.get(voterid_no=v_id)
-    status = 'active'
-    if Election.objects.filter(state=vdetail.state, status=status):
-        velection.e = Election.objects.get(state=vdetail.state, status=status)
-        now = datetime.datetime.now()
-        nowdate = now.strftime("%G-%m-%d")
-        nowtime = now.strftime("%X")
-        sdate = str(velection.e.start_date)
-        if nowdate == sdate:
-            stime = str(velection.e.start_time)
-            etime = str(velection.e.end_time)
-            if stime <= nowtime <= etime:
-                if velection.e.election_type == 'President':
-                    vpc = vdetail.parliamentary
-                    candidates = Candidates.objects.filter(parliamentary=vpc)
-                    return render(request, 'voter/velection.html', {'candidate': candidates,'username':vhome.username,'image':vhome.image})
-                elif velection.e.election_type == 'Governor':
-                    vac=vdetail.assembly
-                    candidates = Candidates.objects.filter(assembly=vac)
-                    return render(request, 'voter/velection.html', {'candidate': candidates,'username':vhome.username,'image':vhome.image})
-            else:
-                messages.info(request, 'No Elections Runnning')
-                return render(request, 'voter/vnoelection.html',{'username':vhome.username,'image':vhome.image})
-        else:
-            messages.info(request, 'No Elections Runnning')
-            return render(request, 'voter/vnoelection.html',{'username':vhome.username,'image':vhome.image})
-    else:
-        messages.info(request, 'No Elections Runnning')
-        return render(request, 'voter/vnoelection.html',{'username':vhome.username,'image':vhome.image})
+    v_id = request.session.get('v_id')
+    
+    if not v_id:
+        # Handle the case where 'v_id' is not present in the session
+        return render(request, 'voter/vnoelection.html', {'username': vhome.username, 'image': vhome.image})
 
+    try:
+        vdetail = Voters.objects.get(voterid_no=v_id)
+    except Voters.DoesNotExist:
+        # Handle the case where voter details are not found
+        return render(request, 'voter/vnoelection.html', {'username': vhome.username, 'image': vhome.image})
+
+    status = 'active'
+    
+    try:
+        velection.e = Election.objects.get(state=vdetail.state, status=status)
+    except Election.DoesNotExist:
+        # Handle the case where no active election is found
+        return render(request, 'voter/vnoelection.html', {'username': vhome.username, 'image': vhome.image})
+
+    now = datetime.datetime.now()
+    nowdate = now.strftime("%G-%m-%d")
+    nowtime = now.strftime("%X")
+    
+    sdate = str(velection.e.start_date)
+
+    if nowdate == sdate:
+        stime = str(velection.e.start_time)
+        etime = str(velection.e.end_time)
+
+        if stime <= nowtime <= etime:
+            if velection.e.election_type == 'President':
+                vlga = vdetail.lga
+                candidates = Candidates.objects.filter(lga=vlga)
+                return render(request, 'voter/velection.html', {'candidate': candidates, 'username': vhome.username, 'image': vhome.image})
+            elif velection.e.election_type == 'Governor':
+                vward = vdetail.ward
+                candidates = Candidates.objects.filter(ward=vward)
+                return render(request, 'voter/velection.html', {'candidate': candidates, 'username': vhome.username, 'image': vhome.image})
+
+    # If none of the above conditions are met, display "No Elections Running" message
+    messages.info(request, 'No Elections Running')
+    return render(request, 'voter/vnoelection.html', {'username': vhome.username, 'image': vhome.image})
 
 @login_required(login_url='home')
 def vote(request):
